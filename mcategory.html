@@ -16,6 +16,7 @@
 <body>
   <div>
     <a id="addA">
+      Agregar
       <span id="moduleSpan"></span>
       <span class="material-symbols-outlined">add</span>
     </a>
@@ -59,7 +60,6 @@
         const response = await fetch(`${server}api/${endpoint}`);
         moduleJSON = await response.json();
         document.addEventListener("DOMContentLoaded", moduleDOMContentLoaded(moduleJSON));
-        console.log(response);
       }
       catch (error) {
         console.log(error);

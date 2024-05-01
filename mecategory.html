@@ -70,48 +70,54 @@
 
         /*send button*/
         async function submitButtonClick() {
-            data = {
-                "id": `${idUrlParams}`,
-                "icon": `${document.getElementById("iconField").value}`,
-                "name": `${document.getElementById("nameField").value}`,
-                "updateField": `${document.getElementById("updateField").value}`,
-                "deleteField": `${document.getElementById("deleteField").value}`
+            if (document.getElementById("nameField").value == "") {
+                window.alert("Ingrese todos los campos");
             }
-            if (action == "save") {
-                delete data.id;
-                try {
-                    const response = await fetch(`${server}api/${endpoint}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    }
-                    );
-                    const _data = await response.json();
-                }
-                catch (error) {
-                    console.log(error);
-                }
-            }
-            else if (action == "update") {
-                try {
-                    const response = await fetch(`${server}api/${endpoint}/${idUrlParams}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    }
-                    );
-                    const _data = await response.json();
+            else {
 
+                data = {
+                    "id": `${idUrlParams}`,
+                    "icon": `${document.getElementById("iconField").value}`,
+                    "name": `${document.getElementById("nameField").value}`,
+                    "updateField": `${document.getElementById("updateField").value}`,
+                    "deleteField": `${document.getElementById("deleteField").value}`
                 }
-                catch (error) {
-                    console.log(error);
+                if (action == "save") {
+                    delete data.id;
+                    try {
+                        const response = await fetch(`${server}api/${endpoint}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        }
+                        );
+                        const _data = await response.json();
+                    }
+                    catch (error) {
+                        console.log(error);
+                    }
                 }
+                else if (action == "update") {
+                    try {
+                        const response = await fetch(`${server}api/${endpoint}/${idUrlParams}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        }
+                        );
+                        const _data = await response.json();
+
+                    }
+                    catch (error) {
+                        console.log(error);
+                    }
+                }
+                window.location.href = module;
             }
-            window.location.href = module;
         }
     </script>
 </body>
